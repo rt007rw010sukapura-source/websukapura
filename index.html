@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RT.007/RW.010 Sukapura - Membangun Generasi Berprestasi</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --dark: #1E0000;
+            --wine: #500805;
+            --clay: #9D331F;
+            --rose: #BC6D4F;
+            --cream: #F5E6D3;
+            --white: #FFFFFF;
+        }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.7;
+            color: var(--dark);
+            background: var(--cream);
+            overflow-x: hidden;
+        }
+        nav {
+            background: linear-gradient(135deg, var(--dark) 0%, var(--wine) 100%);
+            padding: .8rem 0;
+            position: fixed;
+            width: 100%; top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 30px rgba(30,0,0,.3);
+        }
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+        .logo {
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: .7rem;
+            transition: transform .3s;
+        }
+        .logo:hover { transform: scale(1.05); }
+        .logo-uta-img {
+            height: 52px; width: auto;
+            object-fit: contain;
+        }
+        .logo-divider {
+            width: 1px; height: 40px;
+            background: rgba(188,109,79,.5);
+            margin: 0 .3rem;
+        }
+        .logo-text { display: flex; flex-direction: column; line-height: 1.2; }
+        .logo-main { font-size: 1rem; font-weight: 800; color: var(--cream); }
+        .logo-sub  { font-size: .7rem; font-weight: 400; color: var(--rose); letter-spacing: .5px; }
+        .nav-menu { display: flex; list-style: none; gap: .5rem; }
+        .nav-menu a {
+            color: var(--cream);
+            text-decoration: none;
+            font-weight: 600;
+            padding: .7rem 1.3rem;
+            border-radius: 12px;
+            transition: all .3s;
+            font-size: .95rem;
+        }
+        .nav-menu a:hover, .nav-menu a.active { background: rgba(188,109,79,.2); }
+        .menu-toggle {
+            display: none;
+            background: none; border: none;
+            color: var(--cream);
+            font-size: 1.8rem; cursor: pointer;
+        }
+        .hero {
+            background: linear-gradient(135deg, var(--dark) 0%, var(--wine) 50%, var(--clay) 100%);
+            min-height: 100vh;
+            display: flex; align-items: center; justify-content: center;
+            text-align: center;
+            color: var(--cream);
+            padding: 150px 2rem 80px;
+            position: relative; overflow: hidden;
+        }
+        .hero-content { max-width: 900px; position: relative; z-index: 1; }
+        .hero-logo-uta { margin-bottom: 2rem; display: flex; justify-content: center; }
+        .hero-logo-uta img {
+            height: 90px; width: auto; object-fit: contain;
+        }
+        .hero h1 { font-size: 4rem; font-weight: 900; margin-bottom: 1.5rem; color: var(--cream); }
+        .hero-subtitle { font-size: 1.4rem; font-weight: 300; margin-bottom: 1rem; color: var(--cream); }
+        .hero-collab { font-size: .9rem; color: rgba(245,230,211,.7); margin-bottom: 2.5rem; letter-spacing: 1.5px; text-transform: uppercase; }
+        .hero-btn {
+            display: inline-block;
+            padding: 1.2rem 3rem;
+            background: linear-gradient(135deg, var(--clay), var(--rose));
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700; font-size: 1.1rem;
+            box-shadow: 0 8px 25px rgba(157,51,31,.4);
+            transition: all .3s;
+        }
+        .hero-btn:hover { transform: translateY(-4px); box-shadow: 0 12px 35px rgba(157,51,31,.6); }
+        .wave-divider { display:block; width:100%; height:80px; margin-bottom:-1px; }
+        section { padding: 100px 2rem; }
+        .container { max-width: 1200px; margin: 0 auto; }
+        .section-header { text-align: center; margin-bottom: 4rem; }
+        .section-title {
+            font-size: 3.2rem; font-weight: 800;
+            color: var(--dark);
+            margin-bottom: 1.5rem;
+            display: inline-block; position: relative;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute; bottom: -15px; left: 50%;
+            transform: translateX(-50%);
+            width: 80px; height: 5px;
+            background: linear-gradient(90deg, var(--clay), var(--rose));
+            border-radius: 3px;
+        }
+        .section-subtitle { font-size: 1.2rem; color: var(--wine); max-width: 700px; margin: 2rem auto 0; }
+        .glass-card {
+            background: rgba(255,255,255,.12);
+            border-radius: 28px;
+            box-shadow: 0 12px 40px rgba(0,0,0,.2);
+            border: 3px solid rgba(188,109,79,.4);
+            backdrop-filter: blur(10px);
+            padding: 3rem 2.5rem;
+            margin-bottom: 3rem;
+            transition: transform .3s, box-shadow .3s;
+        }
+        .glass-card:hover { transform: translateY(-6px); box-shadow: 0 20px 60px rgba(0,0,0,.3); }
+        .glass-card .svg-icon { width: 56px; height: 56px; margin-bottom: 1.5rem; display: block; }
+        .about { background: linear-gradient(135deg, var(--wine) 0%, var(--clay) 100%); color: var(--cream); }
+        .about .section-title { color: var(--cream); }
+        .about .section-title::after { background: var(--rose); }
+        .about .section-subtitle { color: rgba(245,230,211,.95); }
+        .about-intro { color: var(--cream); font-size: 1.2rem; text-align: center; line-height: 2; }
+        .vision-mission { display: flex; gap: 3rem; margin-top: 3rem; justify-content: center; align-items: stretch; flex-wrap: wrap; }
+        .vm-card { flex: 1 1 400px; min-width: 350px; max-width: 650px; }
+        .vm-card h3 { font-size: 2rem; color: var(--rose); margin-bottom: 1.8rem; display: flex; align-items: center; gap: 1rem; }
+        .vm-card p, .vm-card ol { font-size: 1.05rem; line-height: 2; color: var(--cream); }
+        .vm-card ol { padding-left: 1.8rem; }
+        .vm-card ol li { margin-bottom: 1.2rem; }
+        .struktur { background: linear-gradient(135deg, var(--wine) 0%, var(--clay) 100%); color: var(--cream); }
+        .struktur .section-title { color: var(--cream); }
+        .struktur .section-title::after { background: var(--rose); }
+        .struktur .section-subtitle { color: rgba(245,230,211,.95); }
+        .struktur-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px,1fr)); gap: 2.5rem; margin-top: 2.5rem; }
+        .struktur-card {
+            background: rgba(255,255,255,.12);
+            border: 3px solid rgba(188,109,79,.4);
+            border-radius: 28px; padding: 3rem 2.5rem;
+            text-align: center;
+            box-shadow: 0 8px 40px rgba(0,0,0,.2);
+            transition: transform .3s, box-shadow .3s;
+            backdrop-filter: blur(10px);
+        }
+        .struktur-card:hover { transform: translateY(-8px); box-shadow: 0 15px 50px rgba(0,0,0,.3); }
+        .struktur-card .position { font-size: 1.3rem; font-weight: 700; color: var(--rose); margin-bottom: 1.8rem; text-transform: uppercase; letter-spacing: 1px; }
+        .struktur-card .name { font-size: 2rem; font-weight: 900; color: var(--cream); }
+        .kegiatan { background: linear-gradient(to bottom, #f9f1e8, var(--cream)); }
+        .kegiatan-zigzag { display: flex; flex-direction: column; gap: 3rem; margin-bottom: 3rem; }
+        .activity-card {
+            background: rgba(255,255,255,.95);
+            border-radius: 28px;
+            border: 3px solid var(--rose);
+            box-shadow: 0 12px 40px rgba(30,0,0,.12);
+            overflow: hidden; transition: transform .3s, box-shadow .3s;
+        }
+        .activity-card:hover { transform: translateY(-6px); box-shadow: 0 20px 60px rgba(30,0,0,.2); }
+        .activity-content { padding: 2.5rem 3rem; }
+        .activity-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--clay), var(--rose));
+            color: var(--white);
+            font-size: .9rem; font-weight: 700;
+            border-radius: 12px; padding: .4rem 1.2rem;
+            margin-bottom: 1rem; letter-spacing: .5px;
+        }
+        .activity-title { font-size: 2.2rem; color: var(--dark); margin-bottom: 1rem; font-weight: 800; }
+        .activity-description { font-size: 1.1rem; line-height: 1.9; color: var(--wine); }
+        .gallery { background: linear-gradient(135deg, var(--clay) 0%, var(--wine) 100%); color: var(--cream); }
+        .gallery .section-title { color: var(--cream); }
+        .gallery .section-title::after { background: var(--rose); }
+        .gallery .section-subtitle { color: rgba(245,230,211,.95); }
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px,1fr)); gap: 2.5rem; }
+        .gallery-item {
+            position: relative; border-radius: 20px; overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0,0,0,.3);
+            transition: transform .3s, box-shadow .3s;
+            aspect-ratio: 4/3;
+            background: var(--dark);
+        }
+        .gallery-item:hover { transform: translateY(-8px) scale(1.03); box-shadow: 0 25px 60px rgba(0,0,0,.4); }
+        .gallery-image { width: 100%; height: 100%; object-fit: cover; transition: transform .4s; }
+        .gallery-item:hover .gallery-image { transform: scale(1.08); }
+        .gallery-overlay {
+            position: absolute; bottom: 0; left: 0; right: 0;
+            background: linear-gradient(to top, rgba(30,0,0,.95), transparent);
+            color: var(--cream); padding: 2rem;
+            transform: translateY(100%); transition: transform .3s;
+        }
+        .gallery-item:hover .gallery-overlay { transform: translateY(0); }
+        .gallery-title { font-size: 1.5rem; font-weight: 800; margin-bottom: .5rem; color: var(--rose); }
+        .contact { background: linear-gradient(to bottom, var(--cream), #f9f1e8); }
+        .contact-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px,1fr)); gap: 3rem; margin-top: 3rem; }
+        .contact-box {
+            background: rgba(255,255,255,.9);
+            border: 3px solid var(--rose);
+            border-radius: 28px; padding: 3rem;
+            box-shadow: 0 12px 40px rgba(30,0,0,.12);
+            transition: transform .3s, box-shadow .3s;
+        }
+        .contact-box:hover { transform: translateY(-6px); box-shadow: 0 20px 60px rgba(30,0,0,.2); }
+        .contact-box .svg-icon { width: 48px; height: 48px; margin-bottom: 1.5rem; }
+        .contact-box h3 { font-size: 2rem; margin-bottom: 2rem; color: var(--clay); font-weight: 800; }
+        .contact-item { display: flex; align-items: flex-start; gap: 1.2rem; margin-bottom: 1.8rem; font-size: 1.1rem; }
+        .contact-icon { font-size: 1.8rem; color: var(--clay); }
+        .contact-item strong { color: var(--dark); display: block; margin-bottom: .3rem; }
+        .contact-item a { color: var(--wine); text-decoration: none; transition: color .3s; font-weight: 600; }
+        .contact-item a:hover { color: var(--clay); }
+        footer {
+            background: linear-gradient(135deg, var(--dark) 0%, var(--wine) 100%);
+            color: var(--cream); padding: 3rem 2rem; text-align: center;
+        }
+        .footer-logo { margin-bottom: 2rem; display: flex; justify-content: center; align-items: center; gap: 1rem; }
+        .footer-logo img { height: 60px; width: auto; object-fit: contain; opacity: 1; transition: opacity .3s; }
+        .footer-logo img:hover { opacity: 1; }
+        .footer-logo-divider { width: 1px; height: 50px; background: rgba(188,109,79,.5); }
+        .footer-brand { font-size: 1.1rem; font-weight: 700; color: var(--cream); line-height: 1.5; }
+        .footer-brand .ft-sub { font-size: .8rem; font-weight: 400; color: var(--rose); display: block; }
+        .social-links { display: flex; justify-content: center; gap: 1.5rem; margin-bottom: 2rem; flex-wrap: wrap; }
+        .social-link {
+            display: inline-flex; align-items: center; gap: .7rem;
+            color: var(--cream); text-decoration: none;
+            font-size: 1.1rem; font-weight: 600;
+            padding: .8rem 1.5rem; border-radius: 50px;
+            background: rgba(188,109,79,.2);
+            border: 2px solid rgba(188,109,79,.3);
+            transition: all .3s;
+        }
+        .social-link:hover { background: var(--clay); transform: translateY(-4px); box-shadow: 0 8px 20px rgba(157,51,31,.4); border-color: var(--rose); }
+        .footer-text { margin: 1rem 0; opacity: .9; font-size: 1rem; }
+        .footer-highlight { color: var(--rose); font-weight: 700; font-size: 1.2rem; }
+        #scrollTopBtn {
+            position: fixed; bottom: 30px; right: 30px;
+            background: linear-gradient(135deg, var(--clay), var(--rose));
+            color: var(--white); border: none;
+            width: 55px; height: 55px; border-radius: 50%;
+            font-size: 1.6rem; cursor: pointer;
+            display: none;
+            box-shadow: 0 6px 20px rgba(157,51,31,.4);
+            transition: all .3s; z-index: 999;
+        }
+        #scrollTopBtn:hover { transform: translateY(-4px); box-shadow: 0 10px 30px rgba(157,51,31,.6); }
+        .fade-in { opacity: 0; transform: translateY(30px); transition: opacity .6s, transform .6s; }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+        .section-animate { opacity: 0; transform: translateY(20px); transition: opacity .5s, transform .5s; }
+        .section-animate.visible { opacity: 1; transform: translateY(0); }
+        @media (max-width: 968px) {
+            .nav-menu { position: fixed; left: -100%; top: 75px; flex-direction: column; background: linear-gradient(135deg, var(--dark), var(--wine)); width: 100%; text-align: center; transition: .4s; box-shadow: 0 10px 30px rgba(0,0,0,.3); padding: 1.5rem 0; }
+            .nav-menu.active { left: 0; }
+            .menu-toggle { display: block; }
+            .hero h1 { font-size: 2.5rem; }
+            .section-title { font-size: 2.3rem; }
+            .vision-mission { flex-direction: column; gap: 2rem; }
+            .vm-card { max-width: 100%; min-width: 100%; }
+        }
+        @media (max-width: 768px) {
+            section { padding: 60px 1rem; }
+            .hero { padding: 120px 1rem 60px; }
+            .hero h1 { font-size: 1.8rem; }
+            .hero-subtitle { font-size: 1.1rem; }
+            .section-title { font-size: 2rem; }
+            .glass-card { padding: 2rem 1.5rem; }
+            .contact-box { padding: 2rem 1.5rem; }
+            .gallery-grid { gap: 1.5rem; grid-template-columns: 1fr; }
+            .struktur-grid { gap: 1.5rem; }
+            .struktur-card .name { font-size: 1.6rem; }
+            .logo-divider { display: none; }
+            .activity-content { padding: 2rem 1.5rem; }
+        }
+        /* Footer logo visible and full opacity so colors render correctly */
+        .footer-highlight { display: block; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="nav-container">
+            <a href="#home" class="logo">
+                <img src="assets/logo-uta-Merah-bergandengan2022.png" alt="Logo UTA'45 Jakarta" class="logo-uta-img">
+            </a>
+            <button class="menu-toggle" onclick="toggleMenu()">&#9776;</button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#home"     onclick="closeMenu()">Beranda</a></li>
+                <li><a href="#about"    onclick="closeMenu()">Tentang</a></li>
+                <li><a href="#struktur" onclick="closeMenu()">Struktur</a></li>
+                <li><a href="#kegiatan" onclick="closeMenu()">Kegiatan</a></li>
+                <li><a href="#gallery"  onclick="closeMenu()">Galeri</a></li>
+                <li><a href="#contact"  onclick="closeMenu()">Kontak</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>RT.007/RW.010 Sukapura</h1>
+            <p class="hero-subtitle">Membangun Generasi Berprestasi — Kelurahan Sukapura, Jakarta Utara</p>
+            <a href="#about" class="hero-btn">Lihat lebih lanjut</a>
+        </div>
+    </section>
+
+    <section id="about" class="about section-animate">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Tentang Kami</h2>
+                <p class="section-subtitle">Mengenal lebih dekat RT.007/RW.010 Sukapura, Jakarta Utara</p>
+            </div>
+            <div class="glass-card" style="text-align:center;">
+                <div class="about-intro">
+                    RT.007/RW.010 Sukapura merupakan wilayah komunitas strategis di Kelurahan Sukapura, Jakarta Utara, yang terbentuk sejak era 1970-an sebagai bagian dari pengembangan permukiman rakyat. Melalui musyawarah berkala, RT ini terus berkembang menjadi lingkungan harmonis dengan sekitar 30–50 KK aktif.<br><br>
+                    Berlokasi di kawasan urban Sukapura, RT ini mencakup area seluas sekitar 2 hektar dengan akses mudah ke fasilitas umum seperti pasar, masjid, dan posyandu. Penduduk mayoritas pekerja kelas menengah, dengan komposisi usia muda hingga lansia yang seimbang, mencerminkan keberagaman budaya Jakarta.
+                </div>
+            </div>
+            <div class="vision-mission">
+                <div class="glass-card vm-card">
+                    <h3>🎯 Visi</h3>
+                    <p>Mewujudkan RT.007/RW.010 Sukapura sebagai lingkungan idaman yang aman, nyaman, tentram, bersih, sehat, religius, dan berkelanjutan di tengah dinamika perkotaan Jakarta Utara. Dengan semangat gotong royong yang kokoh berlandaskan Pancasila, kami membangun komunitas warga yang mandiri, produktif, berdaya saing, serta harmonis dalam keberagaman budaya dan sosial. Melalui partisipasi aktif semua lapisan masyarakat, RT ini akan menjadi teladan dalam pemberdayaan sumber daya manusia, pengelolaan lingkungan hijau, peningkatan kesejahteraan ekonomi keluarga, serta sinergi kuat dengan pemerintah kelurahan dan stakeholder terkait untuk mencapai kemajuan bersama yang inklusif dan lestari hingga generasi mendatang.</p>
+                </div>
+                <div class="glass-card vm-card">
+                    <h3>📋 Misi</h3>
+                    <ol>
+                        <li>Meningkatkan kerukunan dan partisipasi warga melalui kegiatan sosial, keagamaan, dan gotong royong yang positif, sambil memelihara nilai Pancasila dan kerjasama dengan pemerintah setempat.</li>
+                        <li>Menyediakan pelayanan publik yang transparan, profesional, dan akuntabel, termasuk administrasi kependudukan, pengelolaan keuangan RT/RW, serta informasi real-time via website.</li>
+                        <li>Mendorong peningkatan sumber daya manusia melalui program pendidikan, kesehatan, pemberdayaan ekonomi kreatif, dan pola hidup sehat untuk mencapai kemandirian dan kesejahteraan.</li>
+                        <li>Memelihara kebersihan, keamanan, dan ketertiban lingkungan dengan zero waste, infrastruktur ramah keluarga, serta pengelolaan sumber daya alam yang lestari dan berwawasan lingkungan.</li>
+                        <li>Menjalin kemitraan dengan BPD, kelurahan, dan masyarakat luas untuk pembangunan partisipatif, inovatif, serta penanganan masalah sosial secara bertanggung jawab.</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="struktur" class="struktur section-animate">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Struktur Kepengurusan</h2>
+                <p class="section-subtitle">Pengurus RT.007/RW.010 Sukapura yang melayani dengan dedikasi</p>
+            </div>
+            <div class="struktur-grid">
+                <div class="struktur-card fade-in">
+                    <div class="position">Ketua RT</div>
+                    <div class="name">Bapak Endang Herianto</div>
+                </div>
+                <div class="struktur-card fade-in">
+                    <div class="position">Sekretaris RT</div>
+                    <div class="name">Bapak Wisnu Rismantoro</div>
+                </div>
+                <div class="struktur-card fade-in">
+                    <div class="position">Bendahara RT</div>
+                    <div class="name">Bapak Suhardi</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="kegiatan" class="kegiatan section-animate">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Kegiatan Kami</h2>
+                <p class="section-subtitle">Program dan aktivitas yang kami laksanakan untuk kemajuan bersama</p>
+            </div>
+            <div class="kegiatan-zigzag">
+                <div class="activity-card fade-in">
+                    <div class="activity-content">
+                        <span class="activity-badge">Pendidikan</span>
+                        <h3 class="activity-title">Rumah Belajar</h3>
+                        <p class="activity-description">Rumah Belajar adalah pusat pendidikan nonformal gratis khusus anak usia dini (PAUD). Kegiatan mencakup bermain edukatif, literasi awal, motorik halus, serta pengenalan nilai sosial melalui cerita dan lagu. Kolaborasi warga dan kelurahan membangun fondasi belajar sejak dini untuk tumbuh kembang optimal anak RT.</p>
+                    </div>
+                </div>
+                <div class="activity-card fade-in">
+                    <div class="activity-content">
+                        <span class="activity-badge">Keagamaan</span>
+                        <h3 class="activity-title">Majelis Taklim</h3>
+                        <p class="activity-description">Majelis Taklim Ibu-Ibu dari Masjid Al Barokah adalah kajian rutin ibu-ibu RT setiap malam Jumat di Masjid Al-Barokah. Kegiatan mencakup pengajian, ceramah keagamaan, tahlilan, doa bersama, serta tausiah tentang akhlak keluarga. Mempererat ukhuwah islamiyah sambil menguatkan nilai religius di lingkungan RT.007/RW.010, Kelurahan Sukapura.</p>
+                    </div>
+                </div>
+                <div class="activity-card fade-in">
+                    <div class="activity-content">
+                        <span class="activity-badge">Lingkungan</span>
+                        <h3 class="activity-title">Aksi Bersih</h3>
+                        <p class="activity-description">Aksi Bersih adalah gerakan rutin bulanan gotong royong warga RT untuk menjaga kebersihan dan keindahan kawasan. Kegiatan mencakup pembersihan got, jalan, dan drainase, daur ulang sampah, serta edukasi zero waste. Kolaborasi warga, pemuda, dan kelurahan menciptakan lingkungan sehat, rapi, serta nyaman bagi semua penghuni.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery" class="gallery section-animate">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Galeri Kegiatan</h2>
+                <p class="section-subtitle">Dokumentasi aktivitas dan kebersamaan warga RT.007/RW.010 Sukapura</p>
+            </div>
+            <div class="gallery-grid">
+                <div class="gallery-item fade-in">
+                    <img src="rumahbelajar.jpeg" alt="Rumah Belajar" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <h4 class="gallery-title">Rumah Belajar</h4>
+                        <p>Kegiatan pembelajaran anak usia dini</p>
+                    </div>
+                </div>
+                <div class="gallery-item fade-in">
+                    <img src="majelistaklim.jpeg" alt="Majelis Taklim" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <h4 class="gallery-title">Majelis Taklim</h4>
+                        <p>Kajian rutin di Masjid Al-Barokah</p>
+                    </div>
+                </div>
+                <div class="gallery-item fade-in">
+                    <img src="aksibersih.jpeg" alt="Aksi Bersih" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <h4 class="gallery-title">Aksi Bersih</h4>
+                        <p>Gotong royong menjaga kebersihan</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact section-animate">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Hubungi Kami</h2>
+                <p class="section-subtitle">Jangan ragu untuk menghubungi kami untuk informasi lebih lanjut</p>
+            </div>
+            <div class="contact-content">
+                <div class="contact-box fade-in">
+                    <h3>Informasi Kontak</h3>
+                    <div class="contact-item">
+                        <span class="contact-icon">📞</span>
+                        <div>
+                            <strong>Telepon</strong>
+                            <a href="tel:082299161353">0822-9916-1353</a>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-icon">✉️</span>
+                        <div>
+                            <strong>Email</strong>
+                            <a href="mailto:katar.sukapura0710@gmail.com">katar.sukapura0710@gmail.com</a>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-icon">📷</span>
+                        <div>
+                            <strong>Instagram</strong>
+                            <a href="https://instagram.com/katar.sukapura0710" target="_blank">@katar.sukapura0710</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-box fade-in">
+                    <h3>Lokasi Kami</h3>
+                    <p style="line-height:2;">
+                        <strong>RT.007/RW.010</strong><br>
+                        Kelurahan Sukapura<br>
+                        Kecamatan Cilincing<br>
+                        Jakarta Utara<br><br>
+                        Kami melayani dengan sepenuh hati untuk kemajuan dan kesejahteraan warga.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="section-animate">
+        <div class="footer-logo">
+            <img src="assets/logo-uta-Merah-bergandengan2022.png" alt="Logo UTA'45 Jakarta" class="logo-uta-img">
+        </div>
+        <div class="social-links">
+            <a href="#" class="social-link"><span>📘</span><span>Facebook</span></a>
+            <a href="https://instagram.com/katar.sukapura0710" target="_blank" class="social-link"><span>📷</span><span>Instagram</span></a>
+            <a href="#" class="social-link"><span>🐦</span><span>Twitter</span></a>
+            <a href="#" class="social-link"><span>🎬</span><span>YouTube</span></a>
+        </div>
+        <p class="footer-text">&copy; 2026 RT.007/RW.010 Sukapura. Semua Hak Dilindungi.</p>
+        <p class="footer-highlight">Membangun Generasi Emas Indonesia 🇮🇩</p>
+    </footer>
+
+    <button id="scrollTopBtn" title="Kembali ke atas" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
+
+    <script>
+        function toggleMenu() { document.getElementById('navMenu').classList.toggle('active'); }
+        function closeMenu() { document.getElementById('navMenu').classList.remove('active'); }
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', e => {
+                e.preventDefault();
+                const t = document.querySelector(a.getAttribute('href'));
+                if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+        }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+        document.querySelectorAll('.fade-in, .section-animate').forEach(el => observer.observe(el));
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section');
+            const links = document.querySelectorAll('.nav-menu a');
+            let cur = '';
+            sections.forEach(s => { if (scrollY >= s.offsetTop - 200) cur = s.id; });
+            links.forEach(l => { l.classList.remove('active'); if (l.getAttribute('href') === '#' + cur) l.classList.add('active'); });
+            document.getElementById('scrollTopBtn').style.display = scrollY > 500 ? 'block' : 'none';
+        });
+    </script>
+</body>
+</html>
+
